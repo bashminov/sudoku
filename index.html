@@ -56,7 +56,7 @@
                 });
                 function checkVert() {
                     for (var i = 0; i < 9; i++) {
-                        for (var j = 0; j < 9; j++) { 
+                        for (var j = 0; j < 9; j++) {
                             var currVal = grid[i][j];
                             for (var k = 0; k < 9; k++) {    
                                 if (grid[k][i] == currVal) {
@@ -81,11 +81,17 @@
                 }
                 var $container = $("#container");
                 for (var j = 0; j < 9; j++) {
-                    var id = "row" + j;
-                    var $row = $("<tr id=" + id + "></tr>");
-                    
+                    var $row = $("<tr></tr>");
+                    var tclass = '';
+                    if (j === 3 || j === 6) {
+                        tclass = 'b1';
+                    }
                     for (var i = 0; i < 9; i++) {
-                        $row.append('<td class="cell"><input class="cell-input" data-tc=' + i + ' data-tr=' + j + ' size=1 autocomplete="off" maxlength=1></td>');
+                        var bclass = tclass;
+                        if ( i === 3 || i === 6 ) {
+                            bclass += ' b0';
+                        }
+                        $row.append('<td class="cell ' + bclass + '"><input class="cell-input" data-tc=' + i + ' data-tr=' + j + ' size=1 autocomplete="off" maxlength=1></td>');
                     }
                     $container.append($row)
                 }
