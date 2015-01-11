@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <style>
+             .board {
+                 background: #ffffff;
+                 border: 2px solid #666699;
+                 input {
+                     border-color: white;
+                     text-align: center;
+                 }
+             }
+             .cell {
+                 border: 1px solid #666666;
+             }
+             input {
+                 width: 100%;
+                 height: 100%;
+                 vertical-align: middle;
+                 font-weight: bold;
+                 font-size: 25px;            
+                 text-align: center;
+                 border: 0px;
+             }
+        </style>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script>
+            $(document).ready(function() {
+                function checkVert() {
+                    for (var i = 0; i < 9; i++) {
+                        for (var j = 0; j < 9; j++) { 
+                            var currVal = grid[i][j];
+                            for (var k = 0; k < 9; k++) {    
+                                if (grid[k][i] == currVal) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                    return true;
+                }
+                function checkHoriz() {
+                }
+                function checkSquares() {
+                    
+                }
+                function isWinner() {
+                    return checkVert() && checkHoriz() && checkSquares();
+                }
+                var grid = Array(9);
+                for (var k = 0; k < 9;k++) {
+                    grid[k] = Array(9);
+                }
+                var $container = $("#container");
+                for (var j = 1; j < 10; j++) {
+                    var id = "row" + j;
+                    var $row = $("<tr id=" + id + "></tr>");
+                    
+                    for (var i = 0; i < 9; i++) {
+                        $row.append('<td class="cell"><input size=1 autocomplete="off" maxlength=1></td>');
+                    }
+                    $container.append($row)
+                }
+            });
+            </script>
+    </head>
+    <body>
+        <table class="board" cellspacing="0" cellpadding="0">
+             <tbody id="container"></tbody>
+        </table>
+    </body>
+</html>
