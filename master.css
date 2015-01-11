@@ -1,0 +1,38 @@
+
+body {
+    background-color: #f9f9f9;
+}
+.board {
+    background: #ffffff;
+    border: 2px solid #666699;
+    input {
+        border-color: white;
+        text-align: center;
+    }
+}
+.cell {
+    border: 1px solid #666666;
+}
+.cell-input {
+    width: 43px;
+    height: 43px;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    border: 0px;
+}
+.btn-submit {
+    margin-top: 10px;
+    background-color: grey;
+    font-weight: bold;
+    font-size: 14px;
+    padding-left: 9px;
+    padding-top: 5px;
+}
+.b0 {
+    border-left: 2px solid #666666;
+}
+.b1 {
+    border-top: 2px solid #666666;
+}
