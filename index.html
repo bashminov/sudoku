@@ -1,47 +1,17 @@
 <html>
     <head>
-        <style>
-             .board {
-                 background: #ffffff;
-                 border: 2px solid #666699;
-                 input {
-                     border-color: white;
-                     text-align: center;
-                 }
-             }
-             .cell {
-                 border: 1px solid #666666;
-             }
-             .cell-input {
-                 width: 43px;
-                 height: 43px;
-                 vertical-align: middle;
-                 font-weight: bold;
-                 font-size: 25px;            
-                 text-align: center;
-                 border: 0px;
-             }
-             .btn-submit {
-                 margin-top: 10px;
-                 background-color: grey;
-                 font-weight: bold;
-                 font-size: 14px;
-                 padding-left: 9px;
-                 padding-top: 5px;
-             }
-             .b0 {
-                 border-left: 2px solid #666666;
-             }
-             .b1 {
-                 border-top: 2px solid #666666;
-             }
-        </style>
+        <link rel="stylesheet" type="text/css" href="master.css">
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
         <script>
             $(document).ready(function() {
-                var grid = [[]];
+                var grid = [], $container = $("#container");;
+                for (var l = 0; l < 9; l++) {
+                    grid[l] = [];
+                }
                 $('.btn-submit').on('click', function(e) {
-                    debugger;    
+                    if (!checkHoriz()) {
+                        $container.append('<div style="color: red">Error</div>');
+                    }    
                 });
                 $('.board').on('focusout', function(e) {
                     var $target = $(e.target), val = parseInt($(e.target).val());
@@ -58,8 +28,8 @@
                     for (var i = 0; i < 9; i++) {
                         for (var j = 0; j < 9; j++) {
                             var currVal = grid[i][j];
-                            for (var k = 0; k < 9; k++) {    
-                                if (grid[k][i] == currVal) {
+                            for (var k = j + 1; k < 9; k++) {    
+                                if (grid[i][k] == currVal || currVal == 'undefined') {
                                     return false;
                                 }
                             }
@@ -68,6 +38,17 @@
                     return true;
                 }
                 function checkHoriz() {
+                    for (var i = 0; i < 9; i++) {
+                        for (var j = 0; j < 9; j++) {
+                            var currVal = grid[j][i];
+                            for (var k = j + 1; k < 9; k++) {
+                                if (grid[k][i] == currVal || currVal == 'underfined') {
+                                    return false;
+                                } 
+                            }
+                        }
+                    }
+                    return true;
                 }
                 function checkSquares() {
                     
@@ -75,11 +56,6 @@
                 function isWinner() {
                     return checkVert() && checkHoriz() && checkSquares();
                 }
-                var grid = Array(9);
-                for (var k = 0; k < 9;k++) {
-                    grid[k] = Array(9);
-                }
-                var $container = $("#container");
                 for (var j = 0; j < 9; j++) {
                     var $row = $("<tr></tr>");
                     var tclass = '';
