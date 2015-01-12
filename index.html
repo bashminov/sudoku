@@ -9,18 +9,22 @@
                     grid[l] = [];
                 }
                 $('.btn-submit').on('click', function(e) {
-                    if (!checkHoriz()) {
-                        $container.append('<div style="color: red">Error</div>');
+                    if (isWinner()) {
+                        var answer = confirm("Congratulations! You Won! \n Play Again?");
                     }    
+                    else {
+                        var answer = confirm("It did not work out!");                   
+                    }
                 });
                 $('.board').on('focusout', function(e) {
-                    var $target = $(e.target), val = parseInt($(e.target).val());
+                    var $target = $(e.target), val = parseInt($(e.target).val()),
+                      tcol = parseInt($target.data('tc')), trow = parseInt($target.data('tr'));
+                    console.log(val);
                     if (isNaN(val) || val < 1 || val > 9) {
                         $target.val('');
+                        grid[tcol][trow] = '';
                     }
                     else {
-                        var tcol = parseInt($target.data('tc'));
-                        var trow = parseInt($target.data('tr'));
                         grid[tcol][trow] = val;    
                     }
                 });
@@ -51,7 +55,27 @@
                     return true;
                 }
                 function checkSquares() {
-                    
+                    for (var y = 0; y < 9; y+=3) {
+                       for (var x = 0; x < 9; x+=3) {
+                           var k = checkSquare(x,y)
+                           if (!k)
+                               return false;
+                       }
+                    }
+                    return true;
+                }
+                function checkSquare(startCol, startRow) {
+                    var hash = {}, val;
+                    for (var i = startCol; i < startCol + 3; i++) {
+                        for (var j = startRow; j < startRow + 3; j++) {
+                            val = grid[i][j];
+                            if (!val || val == 'undefined' || hash[val])
+                                return false;
+                            else 
+                                hash[val] = true;
+                        }
+                    }
+                    return true;
                 }
                 function isWinner() {
                     return checkVert() && checkHoriz() && checkSquares();
