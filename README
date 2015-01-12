@@ -1,0 +1,4 @@
+Sudoku
+
+
+Currently, boards are not generated. A backtrecking search algorithm has to be implemented. Player starts with an empty board. Given the simplicity of the task, I chose to use plain css. On the javascript side, I used Jquery to select elements and attach events. I chose to keep html to minimum, so the whole board is dynamicly generated on the js side. Given a selector, ,my Sudoku builds the whole game inside it  
