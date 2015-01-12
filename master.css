@@ -20,13 +20,16 @@ body {
     border: 0px;
     color: #00bb00
 }
-.btn-submit {
-    margin-top: 10px;
+.btn-submit, .btn-clear {
+    margin-top: 15px;
     background-color: grey;
     font-weight: bold;
     font-size: 14px;
     padding-left: 9px;
     padding-top: 5px;
+}
+.margin-left10 {
+    margin-left: 10px;
 }
 .b0 {
     border-left: 2px solid #666666;

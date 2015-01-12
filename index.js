@@ -1,7 +1,8 @@
 function Sudoku(options) {
     if (!options.$container) return;
     
-    var grid = [], $contents = options.$container.append($('<table class="board" cellspacing="0" cellpadding="0"><tbody id="container"></tbody></table><input type="button" class="btn-submit" value="CHECK SOLUTION!">')), $container = $contents.find('#container');
+    var grid = [], $contents = options.$container.append($('<table class="board" cellspacing="0" cellpadding="0"><tbody id="container"></tbody></table><input type="button" class="btn-submit" value="CHECK SOLUTION!"><input type="button" class="btn-clear margin-left10" value="CLEAR">')), 
+            $container = $contents.find('#container');
     $contents.find('.btn-submit').on('click', function(e) {
         if (isWinner()) {
             var answer = confirm("Congratulations! You Won!");
@@ -23,6 +24,9 @@ function Sudoku(options) {
              grid[tcol][trow] = val;
          }
      });
+     $('.btn-clear').on('click', function(e) {
+         clearBoard();
+     })
      function clearBoard() {
          for (var i = 0; i < 9;i++) {
              for (var j = 0; j < 9;j++) {
