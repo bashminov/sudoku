@@ -4,7 +4,9 @@ function Sudoku(options) {
     var grid = [], $contents = options.$container.append($('<table class="board" cellspacing="0" cellpadding="0"><tbody id="container"></tbody></table><input type="button" class="btn-submit" value="CHECK SOLUTION!">')), $container = $contents.find('#container');
     $contents.find('.btn-submit').on('click', function(e) {
         if (isWinner()) {
-            var answer = confirm("Congratulations! You Won! \n Play Again?");
+            var answer = confirm("Congratulations! You Won!");
+            if (answer)
+                clearBoard();
         }
         else {
             var answer = confirm("It did not work out!");
@@ -21,6 +23,17 @@ function Sudoku(options) {
              grid[tcol][trow] = val;
          }
      });
+     function clearBoard() {
+         for (var i = 0; i < 9;i++) {
+             for (var j = 0; j < 9;j++) {
+                 grid[i][j] = '';
+             }
+             var cells = $('.cell-input')
+             for (var i = 0; i < cells.length; i++) {
+                 $(cells[i]).val('');
+             }
+         }
+     }
      function checkVert() {
         for (var i = 0; i < 9; i++) {
             for (var j = 0; j < 9; j++) {
@@ -34,6 +47,19 @@ function Sudoku(options) {
         }
         return true;
      }
+    function checkHoriz() {
+        for (var i = 0; i < 9; i++) {
+            for (var j = 0; j < 9; j++) {
+                var currVal = grid[j][i];
+                for (var k = j + 1; k < 9; k++) {
+                    if (grid[k][i] == currVal || currVal == 'underfined') {
+                        return false;
+                    } 
+                }
+            }
+        }
+        return true;
+    }
     function initGrid() {
         for (var l = 0; l < 9; l++) {
             grid[l] = [];
